@@ -1,0 +1,15 @@
+SELECT ?qid ?volunteer_fire_department ?volunteer_fire_departmentLabel ?located_in_the_administrative_territorial_entity ?located_in_the_administrative_territorial_entityLabel ?member ?memberLabel ?coordinate ?lat ?lon WHERE {
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],mul,en". }
+  ?volunteer_fire_department wdt:P31 wd:Q285852.
+  BIND(REPLACE(STR(?volunteer_fire_department), "http://www.wikidata.org/entity/", "") AS ?qid)
+  OPTIONAL { ?volunteer_fire_department wdt:P131 ?located_in_the_administrative_territorial_entity. }
+  OPTIONAL { ?volunteer_fire_department wdt:P463 ?member. }
+    OPTIONAL {
+    ?volunteer_fire_department p:P625 ?coordinate.
+    ?coordinate psv:P625 ?coordinate_node.
+    ?coordinate_node wikibase:geoLongitude ?lon;
+      wikibase:geoLatitude ?lat.
+  }
+  ?volunteer_fire_department wdt:P17 wd:Q183.
+}
+ORDER BY ASC(?volunteer_fire_departmentLabel)

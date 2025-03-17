@@ -1,0 +1,40 @@
+{{ template "base" . }}
+
+{{ define "title" }} {{ .volunteer_fire_departmentLabel }} {{ end }}
+
+{{ define "content" }}
+
+<h1> {{ .volunteer_fire_departmentLabel }} </h1>
+
+<h2> Informationen </h2>
+
+<ul>
+  <li>
+    {{ if .located_in_the_administrative_territorial_entity }}
+    In Gemeinde: <a href={{ .located_in_the_administrative_territorial_entity}}> {{ .located_in_the_administrative_territorial_entityLabel }}</a>
+    {{ else }}
+    In Gemeinde: 🤷
+    {{ end }}
+  </li>
+  <li> Auf Karte:
+    {{ if .coordinate }}
+    <a href="https://www.openstreetmap.org/search?lat={{ .lat }}&lon={{ .lon }}"> {{ .lat }}, {{ .lon }}</a>
+    {{ else }}
+    🤷
+    {{ end }}
+  </li>
+  <li>  Mitgliedschaften:
+    {{ if .member }}
+    <a href="{{ .member}}"> {{ .memberLabel }}</a>
+    {{ else }}
+    🤷
+    {{ end }}
+  </li>
+
+</ul>
+
+Fehler gefunden? Hier ist die Quelle: <a href={{ .volunteer_fire_department }}> {{ .qid }}</a>
+
+
+<h3><a href="../index.html">back</a></h3>
+{{ end }}

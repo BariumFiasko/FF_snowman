@@ -1,0 +1,50 @@
+{{ template "base" . }}
+
+{{ define "title" }}Freiwillige Feuerwehren in Deutschland{{ end }}
+
+{{ define "content" }}
+
+<h1>Freiwillige Feuerwehren in Deutschland</h1>
+
+Eine Liste der Freiwilligen Feuerwehren in Deutschland laut Wikidata (Eigenschaft <a href="https://www.wikidata.org/wiki/Q285852"> volunteer fire department (Q285852)</a>).
+<br>
+Stand {{ now.Format "2006-01-02" }}
+
+
+
+<h2>{{ len . }} Freiwillige Feuerwehren gefunden</h2>
+
+Legende:
+<ul>
+  <li>🌐: Geokoordinaten gefunden </li>
+  <li>🏛️: Verwaltungseinheit bekannt</li>
+  <li>👥: Mitgliedschaften eingetragen</li>
+  
+</ul>
+<table>
+    <tr>
+        <th>Wikidata item</th>
+        <th>Feuerwehr</th>
+        <th>Vollständigkeit</th>
+    </tr>
+    {{ range . }}
+    <tr>
+        <td><a href={{ .volunteer_fire_department }}> {{ .qid }}</a></td>
+        <td><a href=department/{{ .qid }}.html>{{ .volunteer_fire_departmentLabel }}</a></td>
+	<td>
+	  {{ if .coordinate }}
+	    🌐
+	  {{ end }}
+	  {{ if .located_in_the_administrative_territorial_entity }}
+	  🏛️
+	  {{ end }}
+	  {{ if .member }}
+	  👥
+	  {{ end }}
+
+
+	</td>
+    </tr>
+    {{ end }}
+</table>
+{{ end }}
