@@ -30,8 +30,26 @@
     🤷
     {{ end }}
   </li>
+  <li>  Website:
+    {{ if .websiteLabel }}
+    <a href="{{ .websiteLabel }}"> {{ .websiteLabel }}</a>
+    {{ else }}
+    🤷
+    {{ end }}
+  </li>
+  <li>  Adresse:
+    {{ if .addressLabel }}
+    {{ .addressLabel }}
+    {{ else }}
+    🤷
+    {{ end }}
+  </li>
 
 </ul>
+
+<iframe width="500" height="650" src="https://www.openstreetmap.org/export/embed.html?bbox=8.9%2C47.2%2C13.8%2C50.6&amp;layer=mapnik&amp;marker={{ .lat }}%2C{{ .lon}}" style="border: 1px solid black"></iframe><br/><small><a href="https://www.openstreetmap.org/?mlat=49.67882&amp;mlon=9.44927#map=14/49.67882/9.44927">View Larger Map</a></small>
+
+<br>
 
 Fehler gefunden? Hier ist die Quelle: <a href={{ .volunteer_fire_department }}> {{ .qid }}</a>
 
